@@ -1,8 +1,8 @@
-pub mod apis;
+mod modules;
+use modules::*;
 
-use crate::apis::oauth::v2::auth;
-use crate::apis::oauth::v2::routes;
-use crate::apis::oauth::v2::types::fake;
+use crate::apis::oauth::v2;
+use crate::apis::oauth::v2::fake;
 
 use actix_web::{App, HttpServer};
 
@@ -11,8 +11,8 @@ fn main() {
     HttpServer::new(|| {
         let ca = Box::new(fake::ClientAuthenticator::new());
         let ua = Box::new(fake::UserAuthenticator::new());
-        let oauth = auth::OAuth::new(ca, ua);
-        return App::new().service(routes::routes(oauth));
+        let oauth = v2::OAuth::new(ca, ua);
+        return App::new().service(v2::routes(oauth));
     })
     .bind("127.0.0.1:8080")
     .unwrap()

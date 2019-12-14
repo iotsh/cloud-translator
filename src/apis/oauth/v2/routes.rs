@@ -1,10 +1,10 @@
-use crate::apis::oauth::v2::auth;
+use crate::apis::oauth::v2;
 
 use actix_web::{web, HttpRequest, Scope};
 use std::rc::Rc;
 
 // Creates routes for OAuth APIs.
-pub fn routes(a: auth::OAuth) -> Scope {
+pub fn routes(a: v2::OAuth) -> Scope {
     let auth = Rc::new(a);
     let scope = web::scope("/oauth/v2");
     return scope.route(

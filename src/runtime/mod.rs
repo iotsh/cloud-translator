@@ -3,7 +3,7 @@
 
 // Import mod from directories
 
-#[path = "v1/mod.rs"]
-pub mod v1;
-
 // Import mod from files
+
+pub mod object;
+pub use object::*;
