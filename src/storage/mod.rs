@@ -13,3 +13,5 @@ pub mod sqlite;
 
 pub mod storage;
 pub use storage::*;
+
+// Import tests from files(*_test.rs)

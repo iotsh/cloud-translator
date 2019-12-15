@@ -16,3 +16,5 @@ pub use routes::*;
 
 pub mod types;
 pub use types::*;
+
+// Import tests from files(*_test.rs)

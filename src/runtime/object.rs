@@ -1,10 +1,35 @@
-pub trait SerializedObject {
-    fn encode(&self) -> Result<Vec<u8>, String>;
-    fn decode(&mut self, data: Vec<u8>) -> Result<(), String>;
+use crate::runtime;
+
+use serde::{Deserialize, Serialize};
+
+pub trait Serializer<T> {
+    fn encode(&self, obj: T) -> Result<Vec<u8>, runtime::Error>;
+    fn decode(&self, data: Vec<u8>) -> Result<T, runtime::Error>;
 }
 
-pub trait TypedObject {
-    fn group(&self) -> String;
-    fn version(&self) -> String;
-    fn kind(&self) -> String;
+pub trait Object: Clone {
+    fn get_type_meta(&self) -> TypeMeta;
+    fn get_object_meta(&self) -> ObjectMeta;
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct TypeMeta {
+    pub group: String,
+    pub version: String,
+    pub kind: String,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct ObjectMeta {
+    pub namespace: String,
+    pub name: String,
+}
+
+impl ObjectMeta {
+    pub fn new(namespace: String, name: String) -> ObjectMeta {
+        return ObjectMeta { namespace, name };
+    }
+    pub fn get_storage_key(&self) -> String {
+        return format!("{}/{}", self.namespace, self.name);
+    }
 }

@@ -5,5 +5,10 @@
 
 // Import mod from files
 
+pub mod error;
+pub use error::*;
+
 pub mod object;
 pub use object::*;
+
+// Import tests from files(*_test.rs)

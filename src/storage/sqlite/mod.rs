@@ -4,3 +4,8 @@
 // Import mod from directories
 
 // Import mod from files
+
+pub mod sqlite;
+pub use sqlite::*;
+
+// Import tests from files(*_test.rs)

@@ -4,3 +4,10 @@
 // Import mod from directories
 
 // Import mod from files
+
+pub mod memory;
+pub use memory::*;
+
+// Import tests from files(*_test.rs)
+
+pub mod memory_test;

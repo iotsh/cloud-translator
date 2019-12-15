@@ -44,7 +44,7 @@ function GenerateModForDir() {
   echo "// Import mod from files" >> $modFile
   echo "" >> $modFile
 
-  local submods=$(cd $parent && ls -p | grep -v / | grep '.rs$')
+  local submods=$(cd $parent && ls -p | grep -v / | grep -E '.rs$' | grep -Ev '_test.rs$')
   local mod
   for mod in $submods; do
 	if [[ "$mod" == "main.rs" || "$mod" == "lib.rs" || "$mod" == "mod.rs" ]]; then
@@ -57,6 +57,18 @@ function GenerateModForDir() {
 
 	echo "pub mod $mod;" >> $modFile
 	echo "pub use $mod::*;" >> $modFile
+    echo "" >> $modFile
+  done
+
+  echo "// Import tests from files(*_test.rs)" >> $modFile
+  echo "" >> $modFile
+
+  local tests=$(cd $parent && ls -p | grep -v / | grep '_test\.rs$')
+  local test
+  for test in $tests; do
+	test=${test::-3}
+
+	echo "pub mod $test;" >> $modFile
     echo "" >> $modFile
   done
 

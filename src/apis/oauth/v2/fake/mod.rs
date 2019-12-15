@@ -7,3 +7,5 @@
 
 pub mod fake;
 pub use fake::*;
+
+// Import tests from files(*_test.rs)
