@@ -1,6 +1,5 @@
 use crate::runtime;
 use crate::runtime::Object;
-use crate::storage;
 use crate::storage::memory;
 use crate::storage::Storage;
 
@@ -49,7 +48,7 @@ fn test_storage() {
             reason: "none".to_string(),
         },
     };
-    storage.create(obj.clone());
+    storage.create(obj.clone()).unwrap();
     let result = storage.list().unwrap();
     assert_eq!(result.len(), 1);
     let x = storage

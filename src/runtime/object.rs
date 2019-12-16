@@ -19,6 +19,16 @@ pub struct TypeMeta {
     pub kind: String,
 }
 
+impl TypeMeta {
+    pub fn new(group: String, version: String, kind: String) -> TypeMeta {
+        return TypeMeta {
+            group,
+            version,
+            kind,
+        };
+    }
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct ObjectMeta {
     pub namespace: String,

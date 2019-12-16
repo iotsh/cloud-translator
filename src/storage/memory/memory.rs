@@ -18,7 +18,7 @@ impl<T: runtime::Object> Storage<T> {
 
 impl<T: runtime::Object> storage::Storage<T> for Storage<T> {
     fn get(&mut self, key: String) -> Result<T, runtime::Error> {
-        let mut storage = self.storage.lock().unwrap();
+        let storage = self.storage.lock().unwrap();
         if !storage.contains_key(&key) {
             return Err(runtime::object_not_found_error(key));
         }
@@ -26,7 +26,7 @@ impl<T: runtime::Object> storage::Storage<T> for Storage<T> {
     }
 
     fn list(&mut self) -> Result<Vec<T>, runtime::Error> {
-        let mut storage = self.storage.lock().unwrap();
+        let storage = self.storage.lock().unwrap();
         let mut result: Vec<T> = Vec::new();
         for (k, v) in storage.iter() {
             result.push(v.clone());

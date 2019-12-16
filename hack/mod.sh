@@ -68,7 +68,8 @@ function GenerateModForDir() {
   for test in $tests; do
 	test=${test::-3}
 
-	echo "pub mod $test;" >> $modFile
+	echo "#[cfg(test)]" >> $modFile
+	echo "mod $test;" >> $modFile
     echo "" >> $modFile
   done
 

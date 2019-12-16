@@ -10,4 +10,5 @@ pub use memory::*;
 
 // Import tests from files(*_test.rs)
 
-pub mod memory_test;
+#[cfg(test)]
+mod memory_test;
